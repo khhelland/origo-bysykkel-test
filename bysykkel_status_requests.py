@@ -10,15 +10,15 @@ def bysykkel_info_request(client_name = "personlig-bysykkel_status"):
     return  requests.get("https://gbfs.urbansharing.com/oslobysykkel.no/station_information.json"
                                      , headers={"client-name": client_name})
 
-def get_table():
+def get_table(client_name="personlig-bysykkel_status"):
 
     table = []
     data_received = False
 
 
     try:
-        response_status = bysykkel_status_request()
-        response_info = bysykkel_info_request()
+        response_status = bysykkel_status_request(client_name)
+        response_info = bysykkel_info_request(client_name)
     except requests.exceptions.ConnectionError:
         print("Could not connect to bysykkel-API")
         return table, data_received
